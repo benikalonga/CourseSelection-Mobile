@@ -19,8 +19,8 @@ export interface UpdateCheckResult {
 }
 
 /**
- * تجزیه رشته نگارش (SemVer) به آرایه‌ای از اعداد صحیح
- * مثال: "1.0.2" -> [1, 0, 2] | "v1.2" -> [1, 2, 0]
+ * Parse a version string (SemVer) into an array of integers
+ * Example: "1.0.2" -> [1, 0, 2] | "v1.2" -> [1, 2, 0]
  */
 export function parseSemver(version: string): number[] {
   if (!version) return [0, 0, 0];
@@ -39,8 +39,8 @@ export function parseSemver(version: string): number[] {
 }
 
 /**
- * مقایسه دو نسخه:
- * خروجی: 1 اگر v1 جدیدتر باشد، -1 اگر v2 جدیدتر باشد، 0 اگر برابر باشند
+ * Compare two versions:
+ * Returns 1 if v1 is newer, -1 if v2 is newer, 0 if they are equal
  */
 export function compareVersions(v1: string, v2: string): number {
   const p1 = parseSemver(v1);
@@ -57,7 +57,7 @@ export function compareVersions(v1: string, v2: string): number {
 }
 
 /**
- * استخراج شماره نسخه منتشر شده در مایکت از داخل کد HTML صفحه برنامه
+ * Extract the published version number from the Myket app page HTML
  */
 export function extractMyketVersion(html: string): string | null {
   if (!html) return null;
@@ -66,7 +66,7 @@ export function extractMyketVersion(html: string): string | null {
 }
 
 /**
- * دریافت آنلاین آخرین نسخه از صفحه رسمی برنامه در مایکت
+ * Fetch the latest version online from the app's official Myket page
  */
 export async function fetchMyketLatestVersion(timeoutMs = 7000): Promise<string | null> {
   const controller = new AbortController();
@@ -93,14 +93,14 @@ export async function fetchMyketLatestVersion(timeoutMs = 7000): Promise<string 
 }
 
 /**
- * دریافت نسخه جاری نصب شده روی گوشی
+ * Get the version currently installed on the phone
  */
 export function getCurrentAppVersion(): string {
   return Constants.expoConfig?.version || "1.0.1";
 }
 
 /**
- * هدایت کاربر به مایکت (ابتدا اپلیکیشن مایکت، در صورت نبود مرورگر وب)
+ * Send the user to Myket (the Myket app first, otherwise the web browser)
  */
 export async function openMyket(): Promise<void> {
   if (Platform.OS === "android") {
@@ -117,7 +117,7 @@ export async function openMyket(): Promise<void> {
 }
 
 /**
- * بررسی وضعیت بروزرسانی، ارسال نوتیفیکیشن در صورت نسخه جدید، و گزارش وضعیت برای نمایش پاپ‌آپ
+ * Check for updates, send a notification for a new version, and report the status for the popup
  */
 export async function checkForUpdatesAsync(options?: {
   forceModal?: boolean;
@@ -136,7 +136,7 @@ export async function checkForUpdatesAsync(options?: {
 
   const isNewer = compareVersions(latestVersion, currentVersion) > 0;
 
-  // بررسی وضعیت تاخیر (اسنوز) پاپ‌آپ: اگر کاربر در ۱۲ ساعت گذشته روی "بعداً" زده باشد
+  // Check whether the popup is snoozed: the user tapped "Later" within the last 12 hours
   let isDismissedRecently = false;
   if (isNewer && !options?.forceModal) {
     try {
@@ -150,7 +150,7 @@ export async function checkForUpdatesAsync(options?: {
     } catch {}
   }
 
-  // ارسال نوتیفیکیشن گوشی در صورت انتشار نسخه جدید
+  // Send a phone notification when a new version is published
   if (isNewer) {
     try {
       const lastNotified = await AsyncStorage.getItem(STORAGE_KEY_LAST_NOTIFIED_VERSION);
@@ -171,7 +171,7 @@ export async function checkForUpdatesAsync(options?: {
 }
 
 /**
- * به تعویق انداختن پاپ‌آپ بروزرسانی برای دفعات بعدی
+ * Snooze the update popup for later
  */
 export async function snoozeUpdateNoticeAsync(): Promise<void> {
   try {

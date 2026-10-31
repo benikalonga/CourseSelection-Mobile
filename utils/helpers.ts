@@ -65,11 +65,11 @@ export function buildExportFilename(prefix: string, ext: string): string {
 export function toEnglishDigits(str: string): string {
   if (!str) return "";
   return str
-    .replace(/[۰-۹]/g, (w) =>
-      String(["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w)),
+    .replace(/[\u06F0-\u06F9]/g, (w) =>
+      String(w.charCodeAt(0) - 0x06f0),
     )
-    .replace(/[٠-٩]/g, (w) =>
-      String(["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"].indexOf(w)),
+    .replace(/[\u0660-\u0669]/g, (w) =>
+      String(w.charCodeAt(0) - 0x0660),
     );
 }
 

@@ -25,7 +25,7 @@ import DatePickerModal from "../ui/DatePickerModal";
 import DayPickerModal from "../ui/DayPickerModal";
 import TimePickerModal from "../ui/TimePickerModal";
 
-const DAYS = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه"];
+const DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
 const initialSession: Session = { day: DAYS[0], start: "08:00", end: "10:00" };
 
 const AnimatedCustomText = Animated.createAnimatedComponent(Text);
@@ -152,13 +152,13 @@ export default function CourseForm() {
     if (isAnimating) return;
 
     if (!name.trim() || !code.trim())
-      return Toast.show({ type: "error", text1: "نام و کد درس الزامی است." });
+      return Toast.show({ type: "error", text1: "Course name and code are required." });
 
     const parsedUnits = parseFloat(toEnglishDigits(units));
     if (!units || !units.trim() || isNaN(parsedUnits) || parsedUnits <= 0) {
       return Toast.show({
         type: "error",
-        text1: "تعداد واحد الزامی است و باید عددی بزرگ‌تر از صفر باشد.",
+        text1: "Units are required and must be a number greater than zero.",
       });
     }
 
@@ -167,12 +167,12 @@ export default function CourseForm() {
       if (!s.start || !s.end)
         return Toast.show({
           type: "error",
-          text1: `ساعت شروع و پایان جلسه ${i + 1} الزامی است.`,
+          text1: `Start and end time for session ${i + 1} are required.`,
         });
       if (parseTimeToMinutes(s.start) >= parseTimeToMinutes(s.end)) {
         return Toast.show({
           type: "error",
-          text1: `در جلسه ${i + 1}، پایان باید بعد از شروع باشد.`,
+          text1: `In session ${i + 1}, the end must be after the start.`,
         });
       }
     }
@@ -180,7 +180,7 @@ export default function CourseForm() {
     if (conflict)
       return Toast.show({
         type: "error",
-        text1: `تداخل زمانی با درس "${conflict}"!`,
+        text1: `Time conflict with course "${conflict}"!`,
       });
 
     if (!noExam) {
@@ -192,7 +192,7 @@ export default function CourseForm() {
       if (examConflict)
         return Toast.show({
           type: "error",
-          text1: `تداخل امتحان با درس "${examConflict}"!`,
+          text1: `Exam conflict with course "${examConflict}"!`,
         });
     }
 
@@ -233,11 +233,11 @@ export default function CourseForm() {
 
     if (selectedCourseId) {
       updateCourse(selectedCourseId, courseData);
-      Toast.show({ type: "success", text1: "درس با موفقیت ویرایش شد." });
+      Toast.show({ type: "success", text1: "Course updated successfully." });
       setSelectedCourseId(null);
     } else {
       addCourse({ id: Date.now(), ...courseData });
-      Toast.show({ type: "success", text1: "درس با موفقیت اضافه شد." });
+      Toast.show({ type: "success", text1: "Course added successfully." });
       setCode("");
       setName("");
       setProfessor("");
@@ -295,13 +295,13 @@ export default function CourseForm() {
             onPress={() => setSelectedCourseId(null)}
             className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20"
           >
-            <Text className="text-red-500 text-xs font-bold">لغو ویرایش</Text>
+            <Text className="text-red-500 text-xs font-bold">Cancel editing</Text>
           </TouchableOpacity>
         ) : (
           <View />
         )}
         <Text className="text-lg font-extrabold text-blue-500 text-right">
-          {selectedCourseId ? "ویرایش درس" : "افزودن درس جدید"}
+          {selectedCourseId ? "Edit course" : "Add new course"}
         </Text>
       </View>
 
@@ -310,7 +310,7 @@ export default function CourseForm() {
           <Text
             className={`text-xs mb-2 mr-1 text-right font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            کد درس
+            Course code
           </Text>
           <TextInput
             value={code}
@@ -324,13 +324,13 @@ export default function CourseForm() {
           <Text
             className={`text-xs mb-2 mr-1 text-right font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            نام درس
+            Course name
           </Text>
           <TextInput
             value={name}
             onChangeText={setName}
             className={`border rounded-2xl h-14 px-4 text-right ${isDark ? "bg-[#1a1c23] border-[#272a35] text-white" : "bg-gray-50 border-gray-200 text-gray-900"}`}
-            placeholder="مثال: برنامه‌نویسی پیشرفته"
+            placeholder="e.g. Advanced Programming"
             placeholderTextColor={isDark ? "#6b7280" : "#9ca3af"}
           />
         </View>
@@ -338,13 +338,13 @@ export default function CourseForm() {
           <Text
             className={`text-xs mb-2 mr-1 text-right font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            نام استاد
+            Professor name
           </Text>
           <TextInput
             value={professor}
             onChangeText={setProfessor}
             className={`border rounded-2xl h-14 px-4 text-right ${isDark ? "bg-[#1a1c23] border-[#272a35] text-white" : "bg-gray-50 border-gray-200 text-gray-900"}`}
-            placeholder="دکتر ...."
+            placeholder="Dr. ...."
             placeholderTextColor={isDark ? "#6b7280" : "#9ca3af"}
           />
         </View>
@@ -352,7 +352,7 @@ export default function CourseForm() {
           <Text
             className={`text-xs mb-2 mr-1 text-right font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            تعداد واحد
+            Units
           </Text>
           <TextInput
             value={units}
@@ -381,7 +381,7 @@ export default function CourseForm() {
           <Text
             className={`text-sm font-bold text-right ${isDark ? "text-gray-200" : "text-gray-700"}`}
           >
-            این درس امتحان ندارد
+            This course has no exam
           </Text>
         </TouchableOpacity>
 
@@ -392,7 +392,7 @@ export default function CourseForm() {
             <Text
               className={`text-xs mb-2 text-right ${isDark ? "text-gray-400" : "text-gray-500"}`}
             >
-              تاریخ امتحان
+              Exam date
             </Text>
             <TouchableOpacity
               disabled={noExam}
@@ -411,7 +411,7 @@ export default function CourseForm() {
             <Text
               className={`text-xs mb-2 text-right ${isDark ? "text-gray-400" : "text-gray-500"}`}
             >
-              ساعت امتحان
+              Exam time
             </Text>
             <TouchableOpacity
               disabled={noExam}
@@ -435,7 +435,7 @@ export default function CourseForm() {
         <Text
           className={`text-sm font-extrabold mb-4 text-right ${isDark ? "text-white" : "text-gray-800"}`}
         >
-          جلسات کلاس
+          Class sessions
         </Text>
 
         {sessions.map((session, index) => (
@@ -457,7 +457,7 @@ export default function CourseForm() {
               <Text
                 className={`text-xs mb-2 text-right ${isDark ? "text-gray-400" : "text-gray-500"}`}
               >
-                روز هفته
+                Day of week
               </Text>
               <TouchableOpacity
                 onPress={() =>
@@ -479,7 +479,7 @@ export default function CourseForm() {
                 <Text
                   className={`text-xs mb-2 text-right ${isDark ? "text-gray-400" : "text-gray-500"}`}
                 >
-                  ساعت شروع
+                  Start time
                 </Text>
                 <TouchableOpacity
                   onPress={() =>
@@ -504,7 +504,7 @@ export default function CourseForm() {
                 <Text
                   className={`text-xs mb-2 text-right ${isDark ? "text-gray-400" : "text-gray-500"}`}
                 >
-                  ساعت پایان
+                  End time
                 </Text>
                 <TouchableOpacity
                   onPress={() =>
@@ -535,7 +535,7 @@ export default function CourseForm() {
         >
           <Plus size={14} color="#3b82f6" />
           <Text className="text-blue-500 text-xs font-bold mt-0.5">
-            افزودن جلسه دیگر برای این درس
+            Add another session for this course
           </Text>
         </TouchableOpacity>
       </View>
@@ -609,7 +609,7 @@ export default function CourseForm() {
               style={{ color: textColor, zIndex: 10 }}
               className="font-extrabold text-base pt-1"
             >
-              {selectedCourseId ? "ثبت تغییرات ویرایش" : "ذخیره درس"}
+              {selectedCourseId ? "Save changes" : "Save course"}
             </AnimatedCustomText>
           </Animated.View>
         </Pressable>

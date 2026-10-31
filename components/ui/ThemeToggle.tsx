@@ -32,12 +32,12 @@ export default function ThemeToggle() {
   });
 
   return (
-    // کانتینر نگهدارنده برای وسط‌چین کردن دقیق دکمه با آیکون‌های 28 پیکسلی
+    // Container that exactly centers the button against the 28px icons
     <View className="justify-center items-center h-7">
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={toggleTheme}
-        style={{ width: 44, height: 28, transform: [{ scale: 0.75 }] }} // اسکیل دقیق برای کوچکتر شدن
+        style={{ width: 44, height: 28, transform: [{ scale: 0.75 }] }} // Exact scale to make it smaller
       >
         <Animated.View
           style={[StyleSheet.absoluteFill, { opacity: lightOpacity }]}

@@ -8,12 +8,12 @@ import BottomSheet from "../ui/BottomSheet";
 import Text from "../ui/CustomText";
 
 export const DAYS = [
-  "شنبه",
-  "یکشنبه",
-  "دوشنبه",
-  "سه‌شنبه",
-  "چهارشنبه",
-  "پنجشنبه",
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
 ];
 
 export default function MobileTimeline() {
@@ -43,7 +43,7 @@ export default function MobileTimeline() {
 
   return (
     <View className="flex-col pb-10">
-      {/* 👇 ترفند مقیاس منفی: اسکرول از سمت راست شروع می‌شود */}
+      {/* Negative scale trick: scrolling starts from the right side */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -59,7 +59,7 @@ export default function MobileTimeline() {
             key={day}
             onPress={() => setActiveDay(day)}
             activeOpacity={0.7}
-            style={{ transform: [{ scaleX: -1 }] }} // 👈 برگرداندن کارت به جهت درست تا آینه نشود
+            style={{ transform: [{ scaleX: -1 }] }} // Flip the card back so it is not mirrored
             className={`px-6 py-3 rounded-2xl border ${
               activeDay === day
                 ? "bg-blue-500 border-blue-500 shadow-sm"
@@ -86,7 +86,7 @@ export default function MobileTimeline() {
             <Text
               className={`font-extrabold text-base ${isDark ? "text-gray-400" : "text-gray-500"}`}
             >
-              کلاسی در این روز نداری!
+              You have no classes on this day!
             </Text>
           </View>
         ) : (
@@ -168,7 +168,7 @@ export default function MobileTimeline() {
                     <Text
                       className={`text-xs font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
                     >
-                      استاد: {course.professor || "-"}
+                      Professor: {course.professor || "-"}
                     </Text>
                     <View
                       className={`border px-2.5 py-1 rounded-lg ${isDark ? "bg-[#12141c] border-[#1f222a]" : "bg-white/60 border-gray-200"}`}

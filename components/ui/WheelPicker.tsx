@@ -46,8 +46,8 @@ export default function WheelPicker({
   return (
     <View style={{ height: ITEM_HEIGHT * 3, width: "100%" }}>
       {/* 
-          👇 باکس آبی با تغییر به -6 کمی بالاتر رفت 
-          تا خطای بصری (Visual Offset) فونت فارسی را جبران کند 
+          The blue box was moved up slightly (to -6)
+          to compensate for the visual offset of the font
       */}
       <View
         style={{

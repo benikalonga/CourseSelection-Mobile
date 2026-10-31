@@ -85,7 +85,7 @@ export default function UpdateModal({
                   : "bg-white border-gray-100"
               }`}
             >
-              {/* دکمه بستن در گوشه بالا */}
+              {/* Close button in the top corner */}
               <TouchableOpacity
                 onPress={handleLaterClick}
                 activeOpacity={0.7}
@@ -96,7 +96,7 @@ export default function UpdateModal({
                 <X size={16} color={isDark ? "#9ca3af" : "#6b7280"} />
               </TouchableOpacity>
 
-              {/* آیکون بالای مدال */}
+              {/* Modal header icon */}
               <View className="items-center mb-4">
                 <View
                   className={`w-16 h-16 rounded-2xl items-center justify-center shadow-lg ${
@@ -113,7 +113,7 @@ export default function UpdateModal({
                 </View>
               </View>
 
-              {/* عنوان مدال */}
+              {/* Modal title */}
               <View className="items-center mb-3">
                 <View className="flex-row items-center gap-1.5 mb-1">
                   <Sparkles size={16} color="#eab308" />
@@ -122,7 +122,7 @@ export default function UpdateModal({
                       isDark ? "text-white" : "text-gray-900"
                     }`}
                   >
-                    بروزرسانی جدید در مایکت
+                    New update on Myket
                   </Text>
                 </View>
                 <Text
@@ -130,11 +130,11 @@ export default function UpdateModal({
                     isDark ? "text-gray-400" : "text-gray-500"
                   }`}
                 >
-                  نسخه تازه اپلیکیشن ابزار انتخاب واحد آماده است
+                  A new version of the Course Selection Tool is ready
                 </Text>
               </View>
 
-              {/* برچسب‌های مقایسه نسخه */}
+              {/* Version comparison labels */}
               <View
                 className={`flex-row items-center justify-center gap-2 p-2.5 rounded-xl mb-4 ${
                   isDark ? "bg-[#1c202e]" : "bg-gray-50"
@@ -142,7 +142,7 @@ export default function UpdateModal({
               >
                 <View className="flex-row items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30">
                   <Text className="text-[11px] font-bold text-emerald-500">
-                    نسخه جدید: v{latestVersion}
+                    New version: v{latestVersion}
                   </Text>
                 </View>
 
@@ -152,22 +152,22 @@ export default function UpdateModal({
                       isDark ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
-                    فعلی: v{currentVersion}
+                    Current: v{currentVersion}
                   </Text>
                 </View>
               </View>
 
-              {/* توضیحات بروزرسانی */}
+              {/* Update description */}
               <Text
                 className={`text-[13px] leading-6 text-center mb-6 ${
                   isDark ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                برای بهره‌مندی از ویژگی‌های جدید، رفع اشکالات و تجربه روان‌تر،
-                همین حالا برنامه را از طریق مایکت بروزرسانی کنید.
+                Update the app from Myket now to get new features, bug fixes
+                and a smoother experience.
               </Text>
 
-              {/* دکمه‌های اقدام */}
+              {/* Action buttons */}
               <View className="gap-2.5">
                 <TouchableOpacity
                   onPress={handleUpdateClick}
@@ -176,7 +176,7 @@ export default function UpdateModal({
                 >
                   <ExternalLink size={18} color="#ffffff" />
                   <Text className="text-white font-bold text-sm">
-                    بروزرسانی از مایکت
+                    Update from Myket
                   </Text>
                 </TouchableOpacity>
 
@@ -192,7 +192,7 @@ export default function UpdateModal({
                       isDark ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
-                    بعداً یادآوری کن
+                    Remind me later
                   </Text>
                 </TouchableOpacity>
               </View>

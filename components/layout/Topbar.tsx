@@ -38,7 +38,7 @@ export default function Topbar({ onExportImage }: Props) {
     if (!selectedCourseId) {
       Toast.show({
         type: "error",
-        text1: "ابتدا یک درس را از برنامه انتخاب کنید.",
+        text1: "Select a course from the schedule first.",
       });
       return;
     }
@@ -49,17 +49,17 @@ export default function Topbar({ onExportImage }: Props) {
     if (selectedCourseId) {
       deleteCourse(selectedCourseId);
       setSelectedCourseId(null);
-      Toast.show({ type: "success", text1: "درس با موفقیت حذف شد." });
+      Toast.show({ type: "success", text1: "Course deleted successfully." });
     }
     setIsConfirmOpen(false);
   };
 
   const handleCopyCodes = async () => {
     if (courses.length === 0)
-      return Toast.show({ type: "error", text1: "درسی برای کپی وجود ندارد." });
+      return Toast.show({ type: "error", text1: "There are no courses to copy." });
     const codes = courses.map((c) => `${c.code} - ${c.name}`).join("\n");
     await Clipboard.setStringAsync(codes);
-    Toast.show({ type: "success", text1: "کد دروس در کلیپ‌بورد کپی شد." });
+    Toast.show({ type: "success", text1: "Course codes copied to the clipboard." });
   };
 
   const handleAddClick = () => {
@@ -67,14 +67,14 @@ export default function Topbar({ onExportImage }: Props) {
       setSelectedCourseId(null);
       Toast.show({
         type: "success",
-        text1: "آماده برای افزودن",
-        text2: "فرم بالای صفحه برای ثبت درس جدید آماده شد.",
+        text1: "Ready to add",
+        text2: "The form at the top is ready for a new course.",
       });
     } else {
       Toast.show({
         type: "info",
-        text1: "شما در حالت افزودن هستید",
-        text2: "برای ثبت درس جدید به فرم بالای صفحه مراجعه کنید.",
+        text1: "You are already in add mode",
+        text2: "Use the form at the top of the page to add a new course.",
       });
     }
   };
@@ -113,7 +113,7 @@ export default function Topbar({ onExportImage }: Props) {
             <Copy size={14} color={isDark ? "#9ca3af" : "#6b7280"} />
           </TouchableOpacity>
 
-          {/* دکمه حذف: فعال وابسته به انتخاب درس */}
+          {/* Delete button: enabled only when a course is selected */}
           <TouchableOpacity
             onPress={handleDeleteClick}
             disabled={!selectedCourseId}
@@ -135,7 +135,7 @@ export default function Topbar({ onExportImage }: Props) {
             />
           </TouchableOpacity>
 
-          {/* دکمه افزودن: بازخورد وابسته به وضعیت فرم */}
+          {/* Add button: feedback depends on the form state */}
           <TouchableOpacity
             onPress={handleAddClick}
             className={`w-7 h-7 items-center justify-center rounded-xl ${
@@ -165,7 +165,7 @@ export default function Topbar({ onExportImage }: Props) {
               }`}
               numberOfLines={1}
             >
-              ابزار انتخاب واحد
+              Course Selection Tool
             </Text>
             <View className="flex-row items-center gap-1.5">
               <View
@@ -179,7 +179,7 @@ export default function Topbar({ onExportImage }: Props) {
                   {totalUnits}
                 </Text>
                 <Text className="text-[9px] text-blue-500 font-bold">
-                  واحد:
+                  Units:
                 </Text>
               </View>
               <View
@@ -201,7 +201,7 @@ export default function Topbar({ onExportImage }: Props) {
                     isDark ? "text-gray-400" : "text-gray-500"
                   }`}
                 >
-                  دروس:
+                  Courses:
                 </Text>
               </View>
             </View>
@@ -217,7 +217,7 @@ export default function Topbar({ onExportImage }: Props) {
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={executeDelete}
-        courseName={selectedCourse?.name || "انتخاب شده"}
+        courseName={selectedCourse?.name || "Selected"}
       />
 
       <ExportModal

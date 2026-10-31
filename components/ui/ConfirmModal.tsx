@@ -33,7 +33,7 @@ export default function ConfirmModal({
       onRequestClose={onClose}
     >
       <View className="flex-1 justify-center items-center px-6">
-        {/* پس‌زمینه تاریک با پوشش کامل صفحه */}
+        {/* Dark backdrop covering the whole screen */}
         <TouchableWithoutFeedback onPress={onClose}>
           <View
             style={[
@@ -43,7 +43,7 @@ export default function ConfirmModal({
           />
         </TouchableWithoutFeedback>
 
-        {/* باکس اصلی مودال با سایه عمیق */}
+        {/* Main modal box with a deep shadow */}
         <View
           style={{
             shadowColor: "#000",
@@ -65,19 +65,19 @@ export default function ConfirmModal({
           <Text
             className={`text-xl font-extrabold text-center mb-3 ${isDark ? "text-white" : "text-gray-900"}`}
           >
-            حذف درس
+            Delete course
           </Text>
 
           <Text
             className={`text-sm text-center mb-8 leading-6 ${isDark ? "text-gray-400" : "text-gray-600"}`}
           >
-            آیا از حذف درس{" "}
-            <Text className="font-extrabold text-red-500">«{courseName}»</Text>{" "}
-            اطمینان دارید؟
+            Are you sure you want to delete{" "}
+            <Text className="font-extrabold text-red-500">"{courseName}"</Text>
+            ?
           </Text>
 
           <View className="flex-row-reverse gap-3">
-            {/* دکمه انصراف (چون flex-row-reverse است، اول نوشته می‌شود تا سمت راست قرار بگیرد) */}
+            {/* Cancel button (rendered first because of flex-row-reverse, so it sits on the right) */}
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={onClose}
@@ -86,18 +86,18 @@ export default function ConfirmModal({
               <Text
                 className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
               >
-                انصراف
+                Cancel
               </Text>
             </TouchableOpacity>
 
-            {/* دکمه حذف (قرارگیری در سمت چپ) */}
+            {/* Delete button (placed on the left) */}
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={onConfirm}
               className="flex-1 py-3.5 rounded-xl bg-red-500 items-center justify-center shadow-sm"
             >
               <Text className="text-white font-extrabold text-sm">
-                بله، حذف کن
+                Yes, delete
               </Text>
             </TouchableOpacity>
           </View>

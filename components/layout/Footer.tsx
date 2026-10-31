@@ -28,7 +28,7 @@ export default function Footer({ isFloating = false, onClose }: FooterProps) {
           elevation: isFloating ? 10 : 2,
         }}
       >
-        {/* بخش کلیک‌خور برای باز کردن مودال توسعه‌دهندگان */}
+        {/* Tappable area that opens the developers modal */}
         <TouchableOpacity
           onPress={() => setShowCredits(true)}
           activeOpacity={0.7}
@@ -47,19 +47,19 @@ export default function Footer({ isFloating = false, onClose }: FooterProps) {
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              درباره ما و تیم سازنده
+              About us and the team
             </Text>
             <Text
               className={`text-[10px] text-right mt-1 ${
                 isDark ? "text-gray-400" : "text-gray-500"
               }`}
             >
-              طراحان پروژه و لینک‌های ارتباطی
+              Project designers and contact links
             </Text>
           </View>
         </TouchableOpacity>
 
-        {/* دکمه بستن یا آیکون ثابت بر اساس حالت شناور بودن */}
+        {/* Close button or static icon depending on whether it is floating */}
         <View className="pl-1">
           {isFloating ? (
             <TouchableOpacity

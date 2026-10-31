@@ -6,7 +6,7 @@ interface IconProps {
   color?: string;
 }
 
-// همون path هایی که در نسخه وب (Footer.tsx) استفاده شده، برای یکسان بودن ظاهر
+// Same paths as the web version (Footer.tsx), so both look identical
 export function GithubIcon({ size = 18, color = "#9ca3af" }: IconProps) {
   return (
     <Svg

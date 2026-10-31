@@ -134,7 +134,7 @@ export default function BottomSheet({ course, onClose }: Props) {
   const executeDelete = () => {
     deleteCourse(activeCourse.id);
     if (isSelected) setSelectedCourseId(null);
-    Toast.show({ type: "success", text1: "درس با موفقیت حذف شد." });
+    Toast.show({ type: "success", text1: "Course deleted successfully." });
     handleClose();
   };
 
@@ -143,8 +143,8 @@ export default function BottomSheet({ course, onClose }: Props) {
     handleClose();
     Toast.show({
       type: "info",
-      text1: "حالت ویرایش فعال شد",
-      text2: "فرم بالای صفحه را بررسی کنید.",
+      text1: "Edit mode enabled",
+      text2: "Check the form at the top of the page.",
     });
   };
 
@@ -199,8 +199,8 @@ export default function BottomSheet({ course, onClose }: Props) {
                 </View>
                 <View className="flex-shrink">
                   {/* 
-                      👇 باگ برش خوردن متن (Clipping) حل شد:
-                      کلاس‌های pt-1 و leading-8 اضافه شدند تا کلاه حرف «آ» زیر باکس نرود 
+                      Fixes text clipping:
+                      pt-1 and leading-8 were added so tall glyphs are not cut off by the box
                   */}
                   <Text
                     className={`text-xl font-extrabold mb-1 pt-1 leading-8 ${isDark ? "text-white" : "text-gray-900"}`}
@@ -210,7 +210,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                   <Text
                     className={`text-sm font-medium ${isDark ? "text-gray-400" : "text-gray-500"}`}
                   >
-                    جزئیات و زمان‌بندی کلاس
+                    Class details and schedule
                   </Text>
                 </View>
               </View>
@@ -237,12 +237,12 @@ export default function BottomSheet({ course, onClose }: Props) {
                 <Text
                   className={`text-xs mb-1 ${isDark ? "text-gray-400" : "text-gray-500"}`}
                 >
-                  استاد درس
+                  Professor
                 </Text>
                 <Text
                   className={`text-sm font-extrabold ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  {activeCourse.professor || "نامشخص"}
+                  {activeCourse.professor || "Unknown"}
                 </Text>
               </View>
               <View
@@ -252,14 +252,14 @@ export default function BottomSheet({ course, onClose }: Props) {
                 <Text
                   className={`text-xs mb-1 ${isDark ? "text-gray-400" : "text-gray-500"}`}
                 >
-                  کد و واحد
+                  Code and units
                 </Text>
                 <Text
                   className={`text-sm font-extrabold ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
                   {activeCourse.code}{" "}
                   <Text className="text-xs text-gray-500 font-normal">
-                    ({activeCourse.units} واحد)
+                    ({activeCourse.units} units)
                   </Text>
                 </Text>
               </View>
@@ -268,7 +268,7 @@ export default function BottomSheet({ course, onClose }: Props) {
             <Text
               className={`text-sm font-extrabold mb-3 ${isDark ? "text-gray-300" : "text-gray-700"}`}
             >
-              زمان‌های برگزاری
+              Session times
             </Text>
             <View className="mb-6">
               {activeCourse.sessions?.map((session, index) => (
@@ -300,7 +300,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                       <Text
                         className={`font-normal ${isDark ? "text-gray-500" : "text-gray-400"}`}
                       >
-                        تا
+                        to
                       </Text>{" "}
                       {session.end}
                     </Text>
@@ -317,11 +317,11 @@ export default function BottomSheet({ course, onClose }: Props) {
                   <View className="flex-row-reverse items-center justify-center gap-2 mb-5">
                     <AlertTriangle size={20} color="#ef4444" />
                     <Text className="text-red-500 font-extrabold text-sm text-center">
-                      آیا از حذف این درس مطمئن هستید؟
+                      Are you sure you want to delete this course?
                     </Text>
                   </View>
 
-                  {/* 👇 دکمه‌های تاییدیه خطی نیز جابجا شدند */}
+                  {/* Inline confirmation buttons were also swapped */}
                   <View className="flex-row-reverse gap-3">
                     <TouchableOpacity
                       activeOpacity={0.8}
@@ -331,7 +331,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                       <Text
                         className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
                       >
-                        انصراف
+                        Cancel
                       </Text>
                     </TouchableOpacity>
 
@@ -341,7 +341,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                       className="flex-1 py-3.5 rounded-xl bg-red-500 items-center justify-center shadow-sm"
                     >
                       <Text className="text-white font-extrabold text-sm">
-                        بله، حذف کن
+                        Yes, delete
                       </Text>
                     </TouchableOpacity>
                   </View>
@@ -357,7 +357,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                     <Text
                       className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
                     >
-                      ویرایش
+                      Edit
                     </Text>
                   </TouchableOpacity>
 
@@ -368,7 +368,7 @@ export default function BottomSheet({ course, onClose }: Props) {
                   >
                     <Trash2 size={18} color="#ef4444" />
                     <Text className="text-red-500 font-bold text-sm">
-                      حذف درس
+                      Delete course
                     </Text>
                   </TouchableOpacity>
                 </View>

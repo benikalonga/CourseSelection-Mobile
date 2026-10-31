@@ -233,11 +233,11 @@ export default function CreditsModal({ visible, onClose }: Props) {
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              درباره‌ی این اپ
+              About this app
             </Text>
           </View>
 
-          {/* توسعه‌دهنده نسخه موبایل */}
+          {/* Mobile app developer */}
           <View
             className={`rounded-2xl border p-5 items-center mb-4 ${
               isDark
@@ -250,19 +250,19 @@ export default function CreditsModal({ visible, onClose }: Props) {
                 isDark ? "text-gray-500" : "text-gray-500"
               }`}
             >
-              توسعه‌ی نسخه‌ی اپلیکیشن موبایل
+              Mobile app development
             </Text>
             <Text
               className={`text-base font-extrabold ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              امیرطاها نعمتی
+              Amirtaha Nemati
             </Text>
             {renderIconRow(mobileDevLinks)}
           </View>
 
-          {/* توسعه‌دهنده نسخه وب */}
+          {/* Web version developer */}
           <View
             className={`rounded-2xl border p-5 items-center ${
               isDark
@@ -275,14 +275,14 @@ export default function CreditsModal({ visible, onClose }: Props) {
                 isDark ? "text-gray-500" : "text-gray-500"
               }`}
             >
-              طراحی و توسعه‌ی نسخه‌ی وب
+              Web version design and development
             </Text>
             <Text
               className={`text-base font-extrabold ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              رضا محمدنیا
+              Reza Mohammadnia
             </Text>
             {renderIconRow(webDevLinks)}
           </View>
@@ -302,7 +302,7 @@ export default function CreditsModal({ visible, onClose }: Props) {
                 isDark ? "text-gray-300" : "text-gray-700"
               }`}
             >
-              بستن
+              Close
             </Text>
           </TouchableOpacity>
         </Animated.View>

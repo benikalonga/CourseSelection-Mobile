@@ -96,7 +96,7 @@ export default function Home() {
     }).start();
   }, [isAtBottom]);
 
-  // تابع بستن نوتیف با دکمه X
+  // Close the notice with the X button
   const dismissBanner = () => {
     Animated.timing(bannerAnim, {
       toValue: 150,
@@ -105,10 +105,10 @@ export default function Home() {
     }).start(() => setIsBannerDismissed(true));
   };
 
-  // محاسبه اسکرول کاربر برای تشخیص رسیدن به انتهای صفحه
+  // Track the user's scroll to detect reaching the end of the page
   const handleScroll = (event: any) => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    // اگر ۱۲۰ پیکسل مانده به انتها بود، یعنی به فوتر اصلی رسیده‌ایم
+    // If within 120 pixels of the end, we have reached the main footer
     const isBottom =
       layoutMeasurement.height + contentOffset.y >= contentSize.height - 120;
 
@@ -119,7 +119,7 @@ export default function Home() {
 
   const handleCaptureTimeline = async (): Promise<void> => {
     if (courses.length === 0) {
-      Toast.show({ type: "error", text1: "تایم‌لاین خالی است." });
+      Toast.show({ type: "error", text1: "The timeline is empty." });
       return Promise.reject(new Error("Empty timeline"));
     }
 
@@ -150,7 +150,7 @@ export default function Home() {
 
                   Toast.show({
                     type: "success",
-                    text1: "تصویر با کیفیت در گوشی شما ذخیره شد.",
+                    text1: "High-quality image saved to your phone.",
                   });
                   resolve();
                   return;
@@ -162,7 +162,7 @@ export default function Home() {
                 if (await Sharing.isAvailableAsync()) {
                   await Sharing.shareAsync(uri, {
                     mimeType: "image/png",
-                    dialogTitle: "ذخیره یا اشتراک تصویر",
+                    dialogTitle: "Save or share image",
                   });
                 }
                 resolve();
@@ -173,7 +173,7 @@ export default function Home() {
             if (await Sharing.isAvailableAsync()) {
               await Sharing.shareAsync(uri, {
                 mimeType: "image/png",
-                dialogTitle: "اشتراک‌گذاری تصویر برنامه",
+                dialogTitle: "Share schedule image",
               });
             }
             resolve();
@@ -181,7 +181,7 @@ export default function Home() {
             reject(new Error("Capture failed"));
           }
         } catch (error) {
-          Toast.show({ type: "error", text1: "خطا در تولید خروجی عکس." });
+          Toast.show({ type: "error", text1: "Failed to export the image." });
           reject(error);
         }
       }, 150);
@@ -199,7 +199,7 @@ export default function Home() {
         onClose={() => setUpdateInfo((prev) => ({ ...prev, isOpen: false }))}
       />
 
-      {/* لایه فوتر شناور (نوتیفیکیشن) */}
+      {/* Floating footer layer (notice) */}
       {!isBannerDismissed && (
         <Animated.View
           style={{
@@ -211,13 +211,13 @@ export default function Home() {
             transform: [{ translateY: bannerAnim }],
             opacity: fadeAnim,
           }}
-          pointerEvents={isAtBottom ? "none" : "auto"} // غیرفعال کردن کلیک وقتی محو شده
+          pointerEvents={isAtBottom ? "none" : "auto"} // Disable taps while faded out
         >
           <Footer isFloating onClose={dismissBanner} />
         </Animated.View>
       )}
 
-      {/* لایه مخفی برای تولید خروجی عکس با کیفیت */}
+      {/* Hidden layer used to render the high-quality image export */}
       <View
         style={{
           position: "absolute",
@@ -275,7 +275,7 @@ export default function Home() {
 
         <View className="flex-1 min-h-[40px]" />
 
-        {/* فوتر اصلی چسبیده به ته صفحه */}
+        {/* Main footer pinned to the bottom of the page */}
         <Footer />
       </ScrollView>
     </View>

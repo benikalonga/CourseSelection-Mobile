@@ -170,14 +170,14 @@ export default function TimePickerModal({
               className={`text-xl font-extrabold ${isDark ? "text-white" : "text-gray-900"}`}
               style={{ writingDirection: "rtl", letterSpacing: 0 }}
             >
-              انتخاب ساعت
+              Select time
             </Text>
           </View>
 
           <View
             className={`rounded-[28px] border p-4 mb-8 ${isDark ? "bg-[#161822] border-[#1f222a]" : "bg-gray-50/50 border-gray-200"}`}
           >
-            {/* 👇 اضافه شدن paddingTop برای فاصله گرفتن از سقف و کاهش paddingBottom */}
+            {/* paddingTop added for spacing from the top, paddingBottom reduced */}
             <View
               style={{
                 flexDirection: "row",
@@ -191,7 +191,7 @@ export default function TimePickerModal({
                 <Text
                   className={`text-xs font-bold pt-2 ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  ساعت
+                  Hour
                 </Text>
               </View>
               <View style={{ width: 30 }} />
@@ -199,7 +199,7 @@ export default function TimePickerModal({
                 <Text
                   className={`text-xs font-bold pt-2 ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  دقیقه
+                  Minute
                 </Text>
               </View>
             </View>
@@ -260,7 +260,7 @@ export default function TimePickerModal({
               <Text
                 className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
               >
-                انصراف
+                Cancel
               </Text>
             </TouchableOpacity>
 
@@ -270,7 +270,7 @@ export default function TimePickerModal({
               className="flex-1 bg-blue-500 py-3.5 rounded-2xl flex-row-reverse items-center justify-center gap-2 shadow-sm"
             >
               <Check size={18} color="white" />
-              <Text className="text-white font-bold text-sm">تأیید ساعت</Text>
+              <Text className="text-white font-bold text-sm">Confirm time</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>

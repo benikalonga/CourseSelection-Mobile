@@ -29,9 +29,9 @@ const CustomToast = ({ text1, text2, type }: CustomToastProps) => {
       activeOpacity={0.9}
       onPress={() => Toast.hide()}
       style={{
-        width: width - 48, // عرض کمتر و جمع‌وجورتر
+        width: width - 48, // Narrower, more compact width
         shadowColor: "#000",
-        shadowOffset: { width: 0, height: 8 }, // سایه ظریف‌تر
+        shadowOffset: { width: 0, height: 8 }, // Softer shadow
         shadowOpacity: isDark ? 0.6 : 0.06,
         shadowRadius: 16,
         elevation: 10,
@@ -40,7 +40,7 @@ const CustomToast = ({ text1, text2, type }: CustomToastProps) => {
         isDark ? "bg-[#1a1c23] border-[#272a35]" : "bg-white border-gray-100"
       }`}
     >
-      {/* باکس آیکون کوچیک‌تر */}
+      {/* Smaller icon box */}
       <View
         className={`w-9 h-9 rounded-full items-center justify-center shrink-0 ${
           type === "success"
@@ -53,7 +53,7 @@ const CustomToast = ({ text1, text2, type }: CustomToastProps) => {
         <Icon size={20} color={iconColor} strokeWidth={2.5} />
       </View>
 
-      {/* بخش متن با سایزهای بهینه‌شده */}
+      {/* Text area with tuned sizes */}
       <View className="flex-1 px-3 justify-center pt-0.5">
         {text1 ? (
           <Text

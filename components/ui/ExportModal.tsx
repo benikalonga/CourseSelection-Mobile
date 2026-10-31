@@ -130,7 +130,7 @@ export default function ExportModal({
     if (courses.length === 0) {
       Toast.show({
         type: "error",
-        text1: "برنامه‌ای برای اشتراک‌گذاری وجود ندارد.",
+        text1: "There is no schedule to share.",
       });
       return;
     }
@@ -160,17 +160,17 @@ export default function ExportModal({
             shareUrl = `https://course-selection-rho.vercel.app/?s=${data.id}`;
           }
         } catch (linkError) {
-          // ارتباط با سرور لینک کوتاه برقرار نشد؛ از لینک مستقیم استفاده می‌شود.
+          // Could not reach the short-link server; fall back to the direct link.
         }
 
         await Share.share({
-          message: `بیا برنامه‌ی هفتگی من رو ببین! 👇\n\n${shareUrl}`,
-          title: "اشتراک‌گذاری برنامه هفتگی",
+          message: `Check out my weekly schedule!\n\n${shareUrl}`,
+          title: "Share weekly schedule",
         });
 
         onClose();
       } catch (error) {
-        Toast.show({ type: "error", text1: "خطا در اشتراک‌گذاری." });
+        Toast.show({ type: "error", text1: "Sharing failed." });
       } finally {
         setIsProcessing(false);
       }
@@ -200,7 +200,7 @@ export default function ExportModal({
 
               Toast.show({
                 type: "success",
-                text1: "فایل پشتیبان با موفقیت در دستگاه ذخیره شد.",
+                text1: "Backup file saved to the device.",
               });
               onClose();
               return;
@@ -218,12 +218,12 @@ export default function ExportModal({
         if (await Sharing.isAvailableAsync()) {
           await Sharing.shareAsync(tempUri, {
             mimeType: "application/json",
-            dialogTitle: "ذخیره فایل پشتیبان",
+            dialogTitle: "Save backup file",
           });
         }
         onClose();
       } catch (error) {
-        Toast.show({ type: "error", text1: "خطا در تهیه نسخه پشتیبان." });
+        Toast.show({ type: "error", text1: "Failed to create the backup." });
       } finally {
         setIsProcessing(false);
       }
@@ -271,17 +271,17 @@ export default function ExportModal({
           importCourses(parsedData);
           Toast.show({
             type: "success",
-            text1: "اطلاعات دروس با موفقیت بازیابی شد.",
+            text1: "Course data restored successfully.",
           });
           onClose();
         } else {
           Toast.show({
             type: "error",
-            text1: "ساختار فایل بکاپ نامعتبر است.",
+            text1: "The backup file format is invalid.",
           });
         }
       } catch (error) {
-        Toast.show({ type: "error", text1: "خطا در خواندن یا پردازش فایل." });
+        Toast.show({ type: "error", text1: "Failed to read or process the file." });
       } finally {
         setIsProcessing(false);
       }
@@ -292,7 +292,7 @@ export default function ExportModal({
     if (courses.length === 0) {
       Toast.show({
         type: "error",
-        text1: "هیچ درسی برای خروجی گرفتن وجود ندارد.",
+        text1: "There are no courses to export.",
       });
       return;
     }
@@ -309,17 +309,17 @@ export default function ExportModal({
               .join(" ");
 
             const examStr = c.exam_date
-              ? `<span class="badge badge-red">${c.exam_date} ساعت ${c.exam_time}</span>`
-              : `<span class="badge badge-gray">بدون امتحان</span>`;
+              ? `<span class="badge badge-red">${c.exam_date} at ${c.exam_time}</span>`
+              : `<span class="badge badge-gray">No exam</span>`;
 
             return `
             <tr>
               <td>
                 <div class="course-title">${c.name}</div>
-                <div class="course-code">کد: ${c.code}</div>
+                <div class="course-code">Code: ${c.code}</div>
               </td>
               <td>${c.professor || "-"}</td>
-              <td><span class="badge badge-gray">${c.units} واحد</span></td>
+              <td><span class="badge badge-gray">${c.units} units</span></td>
               <td><div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 4px;">${sessionsStr}</div></td>
               <td>${examStr}</td>
             </tr>
@@ -376,8 +376,8 @@ export default function ExportModal({
             <body>
               <div class="header">
                 <div class="title">
-                  <h1>برنامه کلاسی و امتحانات</h1>
-                  <p>ابزار جامع انتخاب واحد</p>
+                  <h1>Class and Exam Schedule</h1>
+                  <p>Course Selection Tool</p>
                 </div>
                 <div class="date">${today}</div>
               </div>
@@ -385,11 +385,11 @@ export default function ExportModal({
                 <table>
                   <thead>
                     <tr>
-                      <th width="25%">مشخصات درس</th>
-                      <th width="20%">نام استاد</th>
-                      <th width="10%">تعداد واحد</th>
-                      <th width="25%">زمان برگزاری جلسات</th>
-                      <th width="20%">تاریخ و ساعت امتحان</th>
+                      <th width="25%">Course</th>
+                      <th width="20%">Professor</th>
+                      <th width="10%">Units</th>
+                      <th width="25%">Session times</th>
+                      <th width="20%">Exam date and time</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -397,7 +397,7 @@ export default function ExportModal({
                   </tbody>
                 </table>
               </div>
-              <div class="footer">تولید شده به صورت خودکار • ${today}</div>
+              <div class="footer">Generated automatically • ${today}</div>
             </body>
           </html>
         `;
@@ -423,7 +423,7 @@ export default function ExportModal({
               });
               Toast.show({
                 type: "success",
-                text1: "فایل PDF با موفقیت در دستگاه ذخیره شد.",
+                text1: "PDF file saved to the device.",
               });
               onClose();
               return;
@@ -441,7 +441,7 @@ export default function ExportModal({
         }
         onClose();
       } catch (error) {
-        Toast.show({ type: "error", text1: "خطا در تولید فایل PDF." });
+        Toast.show({ type: "error", text1: "Failed to create the PDF file." });
       } finally {
         setIsProcessing(false);
       }
@@ -508,7 +508,7 @@ export default function ExportModal({
               className={`text-[19px] font-extrabold ${isDark ? "text-white" : "text-gray-900"}`}
               style={{ writingDirection: "rtl", letterSpacing: 0 }}
             >
-              مدیریت خروجی‌ها
+              Export options
             </Text>
           </View>
 
@@ -525,12 +525,12 @@ export default function ExportModal({
                 <Text
                   className={`text-[15px] font-bold text-right mb-0.5 ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  اشتراک‌گذاری برنامه
+                  Share schedule
                 </Text>
                 <Text
                   className={`text-[11px] text-right ${isDark ? "text-gray-500" : "text-gray-500"}`}
                 >
-                  ارسال مستقیم به دوستان از طریق لینک
+                  Send it straight to friends with a link
                 </Text>
               </View>
             </TouchableOpacity>
@@ -547,12 +547,12 @@ export default function ExportModal({
                 <Text
                   className={`text-[15px] font-bold text-right mb-0.5 ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  خروجی PDF
+                  Export PDF
                 </Text>
                 <Text
                   className={`text-[11px] text-right ${isDark ? "text-gray-500" : "text-gray-500"}`}
                 >
-                  ذخیره برنامه هفتگی به صورت فایل PDF
+                  Save the weekly schedule as a PDF file
                 </Text>
               </View>
             </TouchableOpacity>
@@ -569,12 +569,12 @@ export default function ExportModal({
                 <Text
                   className={`text-[15px] font-bold text-right mb-0.5 ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  خروجی تصویر (PNG)
+                  Export image (PNG)
                 </Text>
                 <Text
                   className={`text-[11px] text-right ${isDark ? "text-gray-500" : "text-gray-500"}`}
                 >
-                  ذخیره گرافیکی برنامه به صورت عکس
+                  Save the schedule as an image
                 </Text>
               </View>
             </TouchableOpacity>
@@ -591,12 +591,12 @@ export default function ExportModal({
                 <Text
                   className={`text-[15px] font-bold text-right mb-0.5 ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  تهیه نسخه پشتیبان
+                  Create backup
                 </Text>
                 <Text
                   className={`text-[11px] text-right ${isDark ? "text-gray-500" : "text-gray-500"}`}
                 >
-                  ذخیره اطلاعات دروس با فرمت JSON
+                  Save course data as JSON
                 </Text>
               </View>
             </TouchableOpacity>
@@ -613,12 +613,12 @@ export default function ExportModal({
                 <Text
                   className={`text-[15px] font-bold text-right mb-0.5 ${isDark ? "text-gray-200" : "text-gray-800"}`}
                 >
-                  بازیابی اطلاعات
+                  Restore data
                 </Text>
                 <Text
                   className={`text-[11px] text-right ${isDark ? "text-gray-500" : "text-gray-500"}`}
                 >
-                  بارگذاری فایل پشتیبان و بازیابی دروس
+                  Load a backup file and restore courses
                 </Text>
               </View>
             </TouchableOpacity>
@@ -631,7 +631,7 @@ export default function ExportModal({
           >
             {isProcessing ? (
               <Text className={`font-bold text-blue-500`}>
-                در حال پردازش...
+                Processing...
               </Text>
             ) : (
               <>
@@ -639,7 +639,7 @@ export default function ExportModal({
                 <Text
                   className={`font-bold ml-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}
                 >
-                  انصراف و بستن
+                  Cancel and close
                 </Text>
               </>
             )}

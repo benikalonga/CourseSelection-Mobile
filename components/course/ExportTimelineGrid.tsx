@@ -4,7 +4,7 @@ import { useCourseStore } from "../../store/useCourseStore";
 import { parseTimeToMinutes } from "../../utils/helpers";
 import Text from "../ui/CustomText";
 
-const DAYS = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه"];
+const DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
 const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 const COLORS = [
@@ -68,10 +68,10 @@ export default function ExportTimelineGrid() {
               marginBottom: 6,
             }}
           >
-            برنامه هفتگی کلاس‌ها
+            Weekly Class Schedule
           </Text>
           <Text style={{ color: theme.textMuted, fontSize: 16 }}>
-            ساخته شده توسط ابزار جامع انتخاب واحد
+            Made with the Course Selection Tool
           </Text>
         </View>
         <View
@@ -146,7 +146,7 @@ export default function ExportTimelineGrid() {
                 key={hour}
                 style={{ height: HOUR_HEIGHT, alignItems: "center" }}
               >
-                {/* 👈 تنظیم marginTop به -2 تا ساعت کاملا در خط تراز شود و به بالا نچسبد */}
+                {/* marginTop of -2 keeps the time aligned on the line without sticking to the top */}
                 <Text
                   style={{
                     color: theme.textMuted,

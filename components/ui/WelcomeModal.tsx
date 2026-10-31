@@ -103,36 +103,36 @@ export default function WelcomeModal() {
       key: "add",
       icon: <Plus size={22} color="#3b82f6" />,
       iconBg: "bg-blue-500/10 border-blue-500/20",
-      title: "افزودن درس؛ هوشمند و ضد تداخل ➕",
-      body: "از نوار بالا روی دکمه‌ی «افزودن» بزن. سیستم به قدری باهوشه که اگه ساعت کلاست با یه کلاس دیگه حتی یک دقیقه تداخل داشته باشه، مچت رو می‌گیره و اخطار می‌ده! 🕵️‍♂️✨",
+      title: "Add courses: smart and conflict-free ➕",
+      body: "Tap \"Add\" in the top bar. The app is smart enough that if your class overlaps another one by even a minute, it catches it and warns you! 🕵️‍♂️✨",
     },
     {
       key: "timeline",
       icon: <CalendarDays size={22} color="#10b981" />,
       iconBg: "bg-emerald-500/10 border-emerald-500/20",
-      title: "تایم‌لاین روزانه، مخصوص موبایل 📅",
-      body: "برنامه‌ی هفتگیت به‌صورت یه تایم‌لاین عمودی و مرتب‌شده بر اساس روز نشون داده می‌شه؛ کافیه از تب‌های بالا روز مورد نظرت رو انتخاب کنی.",
+      title: "Daily timeline, built for mobile 📅",
+      body: "Your weekly schedule is shown as a vertical timeline sorted by day; just pick the day you want from the tabs at the top.",
     },
     {
       key: "edit",
       icon: <PenLine size={22} color="#f59e0b" />,
       iconBg: "bg-amber-500/10 border-amber-500/20",
-      title: "مدیریت آسان؛ ویرایش و حذف ✏️",
-      body: "روی هر درس که بزنی، اطلاعات کاملش توی یه پنل شیشه‌ای باز می‌شه. راحت ویرایشش کن یا حذفش کن؛ قبل از حذف قطعی حتماً ازت تاییدیه می‌گیریم تا زحماتت پاک نشه. 🛡️",
+      title: "Easy management: edit and delete ✏️",
+      body: "Tap any course to open its full details in a glass panel. Edit or delete it easily; we always ask for confirmation before deleting so your work is not lost. 🛡️",
     },
     {
       key: "export",
       icon: <Download size={22} color="#6366f1" />,
       iconBg: "bg-indigo-500/10 border-indigo-500/20",
-      title: "خروجی گرفتن و بکاپ 📸",
-      body: "از منوی بالا روی دانلود بزن. می‌تونی از برنامه‌ات عکس (PNG) یا فایل PDF بگیری، یا از کل اطلاعاتت یه فایل پشتیبان (JSON) تهیه کنی تا هر وقت خواستی بازیابیش کنی. 🚀",
+      title: "Export and backup 📸",
+      body: "Tap download in the top menu. You can export your schedule as an image (PNG) or a PDF, or make a backup file (JSON) of all your data to restore whenever you like. 🚀",
     },
     {
       key: "theme",
       icon: <Palette size={22} color="#ef4444" />,
       iconBg: "bg-red-500/10 border-red-500/20",
-      title: "جادوی تم‌ها 🎨",
-      body: "چشمات خسته شده؟ با دکمه‌ی تغییر تم، رنگ‌بندی اپ رو عوض کن؛ هم تم تاریک داریم هم روشن، هرکدوم رو که دوست داری انتخاب کن. 🌗",
+      title: "Theme magic 🎨",
+      body: "Eyes tired? Change the app colors with the theme button; there is a dark theme and a light theme, pick the one you like. 🌗",
     },
   ];
 
@@ -189,7 +189,7 @@ export default function WelcomeModal() {
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              به راهنمای انتخاب واحد خوش اومدی! 🎉
+              Welcome to the course selection guide! 🎉
             </Text>
           </View>
 
@@ -205,8 +205,8 @@ export default function WelcomeModal() {
                 isDark ? "text-gray-300" : "text-gray-700"
               }`}
             >
-              سلام! اینجا همه‌چیز برای راحتی تو طراحی شده تا بدون سردرد یه
-              برنامه‌ی هفتگی بی‌نقص بچینی. بیا سریع بهت بگم اپ چطور کار می‌کنه:
+              Hi! Everything here is designed to make it easy to build a perfect weekly
+              schedule without the headache. Here is a quick tour of how the app works:
             </Text>
 
             {sections.map((s) => (
@@ -251,14 +251,14 @@ export default function WelcomeModal() {
                   isDark ? "text-gray-200" : "text-gray-800"
                 }`}
               >
-                پیشنهادی داری؟ باگی پیدا کردی؟ 🐞
+                Have a suggestion? Found a bug? 🐞
               </Text>
               <Text
                 className={`text-[12px] text-center leading-6 mb-4 ${
                   isDark ? "text-gray-400" : "text-gray-500"
                 }`}
               >
-                از طریق تلگرام مستقیم بهم پیام بده:
+                Message me directly on Telegram:
               </Text>
               <TouchableOpacity
                 onPress={() =>
@@ -301,7 +301,7 @@ export default function WelcomeModal() {
                 <>
                   <Sparkles size={18} color="#fff" />
                   <Text className="text-white font-extrabold text-[15px] text-center mr-2">
-                    باااشه دمت گرم!
+                    Got it, thanks!
                   </Text>
                 </>
               ) : (
@@ -310,7 +310,7 @@ export default function WelcomeModal() {
                     isDark ? "text-gray-400" : "text-gray-500"
                   }`}
                 >
-                  نخوندم بابا خودم بلدم 🙄
+                  Skip, I already know how 🙄
                 </Text>
               )}
             </TouchableOpacity>

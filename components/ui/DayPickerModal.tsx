@@ -14,7 +14,7 @@ import { useCourseStore } from "../../store/useCourseStore";
 import Text from "./CustomText";
 import WheelPicker from "./WheelPicker";
 
-const DAYS = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه"];
+const DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
 
 const { height } = Dimensions.get("window");
 
@@ -162,7 +162,7 @@ export default function DayPickerModal({
               className={`text-xl font-extrabold ${isDark ? "text-white" : "text-gray-900"}`}
               style={{ writingDirection: "rtl", letterSpacing: 0 }}
             >
-              انتخاب روز کلاس
+              Select class day
             </Text>
           </View>
 
@@ -182,7 +182,7 @@ export default function DayPickerModal({
                 <Text
                   className={`text-xs font-bold ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  روزهای هفته
+                  Days of the week
                 </Text>
               </View>
             </View>
@@ -215,7 +215,7 @@ export default function DayPickerModal({
               <Text
                 className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
               >
-                انصراف
+                Cancel
               </Text>
             </TouchableOpacity>
 
@@ -225,7 +225,7 @@ export default function DayPickerModal({
               className="flex-1 bg-blue-500 py-3.5 rounded-2xl flex-row-reverse items-center justify-center gap-2 shadow-sm"
             >
               <Check size={18} color="white" />
-              <Text className="text-white font-bold text-sm">تأیید روز</Text>
+              <Text className="text-white font-bold text-sm">Confirm day</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>

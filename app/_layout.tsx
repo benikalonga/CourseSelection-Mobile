@@ -10,13 +10,13 @@ import { toastConfig } from "../components/ui/ToastConfig";
 import { useCourseStore } from "../store/useCourseStore";
 import { syncAllNotifications } from "../utils/notifications";
 
-// غیرفعال کردن RTL نیتیو برای جلوگیری از باگ لمسی اندروید
+// Disable native RTL to avoid an Android touch bug
 try {
   I18nManager.allowRTL(false);
   I18nManager.forceRTL(false);
 } catch {}
 
-// جلوگیری ایمن از بسته شدن زودهنگام اسپلش اسکرین
+// Safely prevent the splash screen from hiding too early
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export function ErrorBoundary({
@@ -45,7 +45,7 @@ export function ErrorBoundary({
           textAlign: "center",
         }}
       >
-        خطایی در اجرای برنامه رخ داد
+        Something went wrong while running the app
       </Text>
       <Text
         style={{
@@ -56,7 +56,7 @@ export function ErrorBoundary({
           lineHeight: 20,
         }}
       >
-        {error?.message || "خطای ناشناخته"}
+        {error?.message || "Unknown error"}
       </Text>
       <TouchableOpacity
         onPress={retry}
@@ -67,7 +67,7 @@ export function ErrorBoundary({
           borderRadius: 12,
         }}
       >
-        <Text style={{ color: "#ffffff", fontWeight: "bold" }}>تلاش مجدد</Text>
+        <Text style={{ color: "#ffffff", fontWeight: "bold" }}>Try again</Text>
       </TouchableOpacity>
     </View>
   );
@@ -85,7 +85,7 @@ export default function RootLayout() {
   const [fontTimeout, setFontTimeout] = useState(false);
   const [showCustomSplash, setShowCustomSplash] = useState(true);
 
-  // تایمر اطمینان برای فونت‌ها تا در صورت تاخیر یا اشکال فونت‌ها، صفحه سیاه نماند
+  // Safety timer for fonts so the screen does not stay black if fonts are slow or fail to load
   useEffect(() => {
     const timer = setTimeout(() => {
       setFontTimeout(true);

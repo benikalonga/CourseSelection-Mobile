@@ -14,7 +14,7 @@ import { useCourseStore } from "../../store/useCourseStore";
 import Text from "./CustomText";
 import WheelPicker from "./WheelPicker";
 
-// تولید داینامیک سال‌ها (از 1400 تا 1415)
+// Generate years dynamically (1400 to 1415, Jalali calendar)
 const YEARS = Array.from({ length: 16 }, (_, i) => (1400 + i).toString());
 const MONTHS = Array.from({ length: 12 }, (_, i) =>
   (i + 1).toString().padStart(2, "0"),
@@ -42,35 +42,35 @@ export default function DatePickerModal({
   const [month, setMonth] = useState("01");
   const [day, setDay] = useState("01");
 
-  // استیت داینامیک برای نگهداری روزهای مجاز ماه انتخاب‌شده
+  // Dynamic state holding the valid days of the selected month
   const [daysList, setDaysList] = useState<string[]>([]);
 
   const [isVisible, setIsVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(height)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // منطق اصلی تقویم جلالی برای محاسبه روزهای ماه و سال کبیسه
+  // Core Jalali calendar logic for month lengths and leap years
   useEffect(() => {
     const y = parseInt(year, 10);
     const m = parseInt(month, 10);
 
-    // فرمول تقویم ۳۳ ساله برای محاسبه سال کبیسه جلالی
+    // 33-year cycle formula for Jalali leap years
     const isLeapYear = [1, 5, 9, 13, 17, 22, 26, 30].includes(y % 33);
 
     let maxDays = 31;
     if (m >= 7 && m <= 11) {
-      maxDays = 30; // مهر تا بهمن
+      maxDays = 30; // Mehr to Bahman
     } else if (m === 12) {
-      maxDays = isLeapYear ? 30 : 29; // اسفند
+      maxDays = isLeapYear ? 30 : 29; // Esfand
     }
 
-    // تولید لیست روزها تا سقف مجاز
+    // Build the list of days up to the allowed maximum
     const newDays = Array.from({ length: maxDays }, (_, i) =>
       (i + 1).toString().padStart(2, "0"),
     );
     setDaysList(newDays);
 
-    // اگر کاربر روز ۳۱ رو انتخاب کرده بود و رفت به ماهی که ۳۰ روزه است، روز اصلاح بشه
+    // If day 31 was selected and the user moves to a 30-day month, clamp the day
     if (parseInt(day, 10) > maxDays) {
       setDay(maxDays.toString().padStart(2, "0"));
     }
@@ -204,7 +204,7 @@ export default function DatePickerModal({
               className={`text-xl font-extrabold ${isDark ? "text-white" : "text-gray-900"}`}
               style={{ writingDirection: "rtl", letterSpacing: 0 }}
             >
-              انتخاب تاریخ امتحان
+              Select exam date
             </Text>
           </View>
 
@@ -224,7 +224,7 @@ export default function DatePickerModal({
                 <Text
                   className={`text-xs font-bold ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  سال
+                  Year
                 </Text>
               </View>
               <View style={{ width: 20 }} />
@@ -232,7 +232,7 @@ export default function DatePickerModal({
                 <Text
                   className={`text-xs font-bold ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  ماه
+                  Month
                 </Text>
               </View>
               <View style={{ width: 20 }} />
@@ -240,7 +240,7 @@ export default function DatePickerModal({
                 <Text
                   className={`text-xs font-bold ${isDark ? "text-gray-500" : "text-gray-400"}`}
                 >
-                  روز
+                  Day
                 </Text>
               </View>
             </View>
@@ -310,7 +310,7 @@ export default function DatePickerModal({
               </View>
 
               <View style={{ flex: 1, height: 162 }}>
-                {/* 👈 استفاده از استیت داینامیک daysList به جای ثابت */}
+                {/* Use the dynamic daysList state instead of a fixed list */}
                 <WheelPicker
                   items={daysList}
                   selectedValue={day}
@@ -330,7 +330,7 @@ export default function DatePickerModal({
               <Text
                 className={`font-bold text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}
               >
-                انصراف
+                Cancel
               </Text>
             </TouchableOpacity>
 
@@ -340,7 +340,7 @@ export default function DatePickerModal({
               className="flex-1 bg-blue-500 py-3.5 rounded-2xl flex-row-reverse items-center justify-center gap-2 shadow-sm"
             >
               <Check size={18} color="white" />
-              <Text className="text-white font-bold text-sm">تأیید تاریخ</Text>
+              <Text className="text-white font-bold text-sm">Confirm date</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>

@@ -19,7 +19,7 @@ try {
     }),
   });
 } catch (e) {
-  console.warn("[notifications] در این محیط در دسترس نیست:", e);
+  console.warn("[notifications] not available in this environment:", e);
 }
 
 export const CLASS_REMINDER_LEAD_MINUTES = 15;
@@ -32,15 +32,15 @@ export const CHANNEL_DIGEST = "daily-digest";
 export const CHANNEL_EXAM = "exam-reminders";
 export const CHANNEL_UPDATES = "app-updates";
 
-// Expo: 1=یکشنبه ... 7=شنبه
+// Expo: 1=Sunday ... 7=Saturday
 export const WEEKDAY_NUMBER: Record<string, number> = {
-  شنبه: 7,
-  یکشنبه: 1,
-  دوشنبه: 2,
-  سه‌شنبه: 3,
-  چهارشنبه: 4,
-  پنجشنبه: 5,
-  جمعه: 6,
+  Saturday: 7,
+  Sunday: 1,
+  Monday: 2,
+  Tuesday: 3,
+  Wednesday: 4,
+  Thursday: 5,
+  Friday: 6,
 };
 export const DAY_NAME_BY_WEEKDAY: Record<number, string> = Object.fromEntries(
   Object.entries(WEEKDAY_NUMBER).map(([name, num]) => [num, name]),
@@ -49,21 +49,21 @@ export const DAY_NAME_BY_WEEKDAY: Record<number, string> = Object.fromEntries(
 export async function setupNotificationChannelsAsync() {
   if (Platform.OS !== "android") return;
   await Notifications.setNotificationChannelAsync(CHANNEL_CLASS, {
-    name: "یادآور شروع کلاس",
+    name: "Class start reminder",
     importance: Notifications.AndroidImportance.DEFAULT,
     vibrationPattern: [0, 200, 200, 200],
   });
   await Notifications.setNotificationChannelAsync(CHANNEL_DIGEST, {
-    name: "یادآور شبانه برنامه فردا",
+    name: "Evening reminder for tomorrow's schedule",
     importance: Notifications.AndroidImportance.DEFAULT,
   });
   await Notifications.setNotificationChannelAsync(CHANNEL_EXAM, {
-    name: "یادآور امتحان",
+    name: "Exam reminder",
     importance: Notifications.AndroidImportance.MAX,
     vibrationPattern: [0, 300, 200, 300],
   });
   await Notifications.setNotificationChannelAsync(CHANNEL_UPDATES, {
-    name: "بروزرسانی‌های برنامه",
+    name: "App updates",
     importance: Notifications.AndroidImportance.HIGH,
     vibrationPattern: [0, 250, 250, 250],
   });
@@ -80,8 +80,8 @@ export async function notifyNewAppUpdateAsync(version: string) {
     await Notifications.scheduleNotificationAsync({
       identifier: `app-update:${version}`,
       content: {
-        title: "🚀 بروزرسانی جدید در مایکت",
-        body: `نسخه ${version} ابزار انتخاب واحد منتشر شد! برای استفاده از امکانات جدید، برنامه را بروزرسانی کنید.`,
+        title: "🚀 New update on Myket",
+        body: `Version ${version} of the Course Selection Tool is out! Update the app to use the new features.`,
         sound: "default",
         data: {
           url: "https://myket.ir/app/com.amirtaha.courseselection",
@@ -140,8 +140,8 @@ export async function scheduleClassStartReminders(course: Course) {
     await Notifications.scheduleNotificationAsync({
       identifier: `class-reminder:${course.id}:${i}`,
       content: {
-        title: "🎓 کلاست داره شروع میشه",
-        body: `${CLASS_REMINDER_LEAD_MINUTES} دقیقه دیگه کلاس «${course.name}» ساعت ${session.start} شروع می‌شود.`,
+        title: "🎓 Your class is starting soon",
+        body: `Your class "${course.name}" starts in ${CLASS_REMINDER_LEAD_MINUTES} minutes at ${session.start}.`,
         sound: "default",
       },
       trigger: {
@@ -172,17 +172,17 @@ export async function scheduleExamReminders(course: Course) {
     {
       id: `exam-reminder:${course.id}:week-before`,
       date: weekBefore,
-      body: `یک هفته تا امتحان «${course.name}» مونده (${course.exam_date} ساعت ${course.exam_time}).`,
+      body: `One week until the "${course.name}" exam (${course.exam_date} at ${course.exam_time}).`,
     },
     {
       id: `exam-reminder:${course.id}:day-before`,
       date: dayBefore,
-      body: `فردا امتحان «${course.name}» داری (ساعت ${course.exam_time}).`,
+      body: `You have the "${course.name}" exam tomorrow (at ${course.exam_time}).`,
     },
     {
       id: `exam-reminder:${course.id}:hour-before`,
       date: oneHourBefore,
-      body: `۱ ساعت دیگه امتحان «${course.name}» شروع می‌شود!`,
+      body: `The "${course.name}" exam starts in 1 hour!`,
     },
   ];
 
@@ -190,7 +190,7 @@ export async function scheduleExamReminders(course: Course) {
     if (job.date.getTime() <= now.getTime()) continue;
     await Notifications.scheduleNotificationAsync({
       identifier: job.id,
-      content: { title: "📝 یادآور امتحان", body: job.body, sound: "default" },
+      content: { title: "📝 Exam reminder", body: job.body, sound: "default" },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.DATE,
         date: job.date,
@@ -211,12 +211,12 @@ export async function scheduleEveningDigests(courses: Course[]) {
     );
     if (coursesTomorrow.length === 0) continue;
 
-    const names = coursesTomorrow.map((c) => c.name).join("، ");
+    const names = coursesTomorrow.map((c) => c.name).join(", ");
     await Notifications.scheduleNotificationAsync({
       identifier: `evening-digest:${weekday}`,
       content: {
-        title: "📅 فردا دانشگاه داری",
-        body: `فردا کلاس داری: ${names}`,
+        title: "📅 You have classes tomorrow",
+        body: `Tomorrow's classes: ${names}`,
         sound: "default",
       },
       trigger: {

@@ -34,7 +34,7 @@ export default function AnimatedSplash({ onFinish }: Props) {
       }
     };
 
-    // تضمین ۱۰۰٪ عدم قفل شدن صفحه اسپلش حتی در صورت بروز خطا در انیمیشن
+    // Guarantee the splash screen never gets stuck, even if the animation fails
     const timer = setTimeout(safeFinish, 1200);
 
     try {
@@ -138,7 +138,7 @@ export default function AnimatedSplash({ onFinish }: Props) {
               color: isDark ? "#ffffff" : "#111827",
             }}
           >
-            ابزار انتخاب واحد
+            Course Selection Tool
           </Text>
           <Text
             style={{
@@ -148,7 +148,7 @@ export default function AnimatedSplash({ onFinish }: Props) {
               color: isDark ? "#6b7280" : "#9ca3af",
             }}
           >
-            برنامه‌ریزی هوشمند ترم تحصیلی
+            Smart semester planning
           </Text>
         </Animated.View>
       </View>
