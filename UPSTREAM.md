@@ -1,6 +1,6 @@
 # Upstream / Attribution
 
-This repository is a copy of **[amirtahanemati/CourseSelection-Mobile](https://github.com/amirtahanemati/CourseSelection-Mobile)**, used for an AI code-review research project.
+This repository is a copy of **[amirtahanemati/CourseSelection-Mobile](https://github.com/amirtahanemati/CourseSelection-Mobile)**.
 
 - Original repository: https://github.com/amirtahanemati/CourseSelection-Mobile
 - Copied from branch `main` at commit [`3baac4f1e67f`](https://github.com/amirtahanemati/CourseSelection-Mobile/commit/3baac4f1e67f0ebf4638bfd64b8b21a64c25b385) on 2026-10-31
